@@ -1,0 +1,104 @@
+Thibault Rosa
+Anne-Sophie Saint-Omer
+
+---- Exercice 1 
+
+-- Question 1 
+
+
+Voir livre.xml 
+
+//livre[titre="edition"] -> <titre> edition </titre>
+//livre[titre=edition] -> <titre> Gallimard </titre>
+			  <edition> Gallimard </edition>
+
+Cas où les deux expressions renvoient la même chose : <livre>
+							<titre>edition</titre>
+							<edition>edition</edition>
+						      </livre> 
+
+-- Question 2 
+
+2 - Le dernier livre qui a pour titre "labd"
+1 et 3 - Renvoie vrai si le dernier livre a pour titre "labd"
+
+Exemple pour lequel les 3 requêtes ne donnent pas toutes le même résultat -> Voir livreq2.xml
+
+
+-- Question 3 
+
+/descendant::livre[1] retourne le premier livre.
+//livre[1] retournent tous les livres premiers dans la hiérarchie. 
+
+Voir livreq3.xml pour voir un exemple dans lequel les deux expressions ne renvoient pas le même résultat.
+
+
+---- Exercice 2
+
+1. //fruit/producteur (tous les producteurs de fruits)
+
+2. //legume[origine="Espagne"] (tous les legumes originaire d'Espagne)
+
+3. //fruit[@type="clementine" and @calibre="1" and bio] (toutes les clémentines de calibre 1, et issues de l'agriculture bio)
+
+4. //producteur[following-sibling::origine[@region="Bretagne"]] (tous les produits originaires de Bretagne)
+
+---- Exercice 3
+
+
+-- recettes1.xml 
+
+1.//titre
+
+2.//nom_ing
+
+3.//recette[2]/titre
+
+4.//recette/texte/etape[position()=last()]
+
+5. count(//recette)
+
+6. //recette[count(ingredients/ingredient) < 7]
+
+7. //recette[count(ingredients/ingredient) < 7]/titre
+
+8. //recette[ingredients/ingredient/nom_ing= "farine"]
+
+9. //recette[contains(categorie,"entrée")]
+
+
+-- recettes2.xml 
+ 
+1. //titre
+
+2. //ingredient/@nom
+
+3. //recette[position()=2]/titre
+	//recette[2]/titre
+
+4. //recette/texte/etape[position()=last()]
+
+5. count(//recette)
+
+6. //recette[count(ingredients/ing-recette) <7 ]
+
+7. //recette[count(ingredients/ing-recette) <7 ] /titre
+
+8. //recette[ingredients/ing-recette[@ingredient="farine"]] 
+
+9. //recette[contains(@categ,"entree")]
+
+
+
+--- Exercice 4
+
+
+1. /plist/dict/dict/ count(key)
+2. distinct-values(plist/dict/dict/dict[key="Album"] /string[count(../key[.="Album"]/preceding-sibling::string)+1])
+3. plist/dict/dict/dict[key="Genre"] /string[count(../key[.="Genre"]/preceding-sibling::string)+1]
+4. count(plist/dict/dict/dict[key="Genre"] /string[count(../key[.="Genre"]/preceding-sibling::string) + 1 and .="Jazz"])
+5. distinct-values(plist/dict/dict/dict[key="Genre"] /string[count(../key[.="Genre"]/preceding-sibling::string)+1])
+6. plist/dict/dict/dict[key="Play Count"] /string[count(../key[.="Name"]/preceding-sibling::string) + 1] 
+7.plist/dict/dict/dict[count(key[.="Play Count"])=0] /string[count(../key[.="Name"]/preceding-sibling::string) + 1] 
+8. plist/dict/dict/dict[key="Name" and key="Year" and integer[count(../key[.="Year"]/preceding-sibling::integer)+1 ]=string(min(//plist/dict/dict/dict[ key[.="Year"] ]/integer[count(../key[.="Year"]/preceding-sibling::integer)+1]))]/string[count(../key[.="Name"]/preceding-sibling::string) + 1]
+
